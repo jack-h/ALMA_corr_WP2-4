@@ -77,7 +77,7 @@ We hypothesize the following system:
     \item $N_x = 256$ X-Engines, each processing 89.6~Gb/s, over a single 100~GbE link.
 \end{itemize}
 
-Such a system requires two duplicates of a corner-turner with 112 F-Engine inputs, and 128 X-Engine outputs. Thus, the corner-turner is a switch with at least $128+112=240$ 100~GbE ports. Such switches are available off-the-shelf today. For example, the Arista 7508R with up to 288 100~GbE ports.
+Such a system requires, for each of the two BBCs, two duplicates of a corner-turner with 112 F-Engine inputs, and 128 X-Engine outputs. Thus, the corner-turner is a switch with at least $128+112=240$ 100~GbE ports. Such switches are available off-the-shelf today. For example, the Arista 7508R with up to 288 100~GbE ports.
 
 Alternatively, one can construct a larger switch from smaller modules, which can have more predictable performance for the all-to-all corner-turn systems required by correlators. In this case, the same system can be achieved with 8 individual 64-port 100~GbE switches, such as the 7260CX-64.
 
