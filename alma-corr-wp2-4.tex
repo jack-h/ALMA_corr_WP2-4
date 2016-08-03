@@ -58,6 +58,15 @@ We assume that a complete correlator system comprises $N_x$ X-Engines, each proc
 
 Where the connection between the $N_f$ F-Engines and $N_x$ X-Engines is not direct (because, for example, it is mediated by an Ethernet switch) there is no requirement that the protocol of the F- and X-Engine interfaces should be the same.
 
+\section{Custom Backplane/Switch}
+The present ALMA correlator uses $16384$ LVDS twisted-pair cables operating at 250~MHz, representing ``the greatest design challenge in the system'' \cite{Escoffier2007}, to connect the \emph{station cards} (effectively equivalent to F-engines) to the \emph{correlator cards} (similarly equivalent to the X-engines). With the increased specifications of the next-generation ALMA correlator a corner-turn implementation using the same technology would see the total number of cables increase roughly five-fold, mainly driven by the doubling in bandwidth and sample bitwidth. Increasing the per-lane speed by a factor of two or even four may reduce the total number of cables but for the purposes of simplicity we will consider other options.
+
+PCI-Express is a common standard for connecting many processing boards via a backplane type configuration supporting transfer speeds up to 125 Gbps per endpoint (for Gen3 with 16 lanes). Additionally the standard allows data transfers between slaves by using bus mastering. All PCI-Express endpoints, however, must connect to either a root complex or a switch and given these devices with 16 or more endpoints are rare or non-existent we will not consider this technology for ngALMA (which will require upwards of 64 endpoints).
+
+Another popular standard is RapidIO commonly used in high-performance computing and data centers. RapidIO supports both backplane- and switch-based systems with sub-microsecond latency transfers at speeds of up to160 Gbps per port. However the availability of switches with greater than 16 ports is limited and are generally in the form of chips that would need to be designed into a PCB backplane. Additionally the limited maximum payload size of 256 bytes may present challenges for a correlator corner-turn design compared to the jumbo packets supported by Ethernet.
+
+Generally, we believe the cost and NRE of designing a custom corner-turn platform would greatly outweigh the benefits offered by technologies such as RapidIO or PCI-Express. This is especially important considering the off-the-shelf availability of very fast ($\sim$100 Gbps) and very large (\textgreater 64 ports) Gigabit Ethernet switches.
+
 \section{Ethernet Switch}
 An Ethernet switch has a variety of attractive attributes:
 \begin{itemize}
